@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Spice Route restaurant graph",
+  "type": "object",
+  "required": ["graph"],
+  "properties": {
+    "graph": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": ["id", "type", "name", "location", "cuisine", "open", "image", "dishes"],
+            "properties": {
+              "id": { "type": "string" },
+              "type": { "const": "Restaurant" },
+              "name": { "type": "string" },
+              "location": { "type": "string" },
+              "cuisine": { "type": "string" },
+              "open": { "type": "boolean" },
+              "image": { "type": "string", "format": "uri" },
+              "dishes": { "type": "array", "items": { "type": "string" } }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": ["id", "type", "name", "category", "description", "price", "image", "vegetarian", "popular"],
+            "properties": {
+              "id": { "type": "string" },
+              "type": { "const": "Dish" },
+              "name": { "type": "string" },
+              "category": { "type": "string" },
+              "description": { "type": "string" },
+              "price": { "type": "number", "minimum": 0 },
+              "image": { "type": "string", "format": "uri" },
+              "vegetarian": { "type": "boolean" },
+              "popular": { "type": "boolean" }
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}
